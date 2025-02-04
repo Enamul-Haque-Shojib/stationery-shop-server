@@ -5,7 +5,7 @@ import AppError from "../../errors/AppError";
 import { authSearchableField } from "./Auth.constant";
 import { TAuth, TLogin } from "./Auth.interface";
 import { AuthModel } from "./Auth.model";
-import { createToken } from "./Auth.utils";
+import { createToken, verifyToken } from "./Auth.utils";
 
 
 const createAuthIntoDB = async (payload: TAuth) => {
@@ -70,6 +70,7 @@ const loginAuthIntoDB = async (payload: TLogin) => {
   if (!auth) {
     throw new AppError(404, 'This user is not found !');
   }
+ 
 
 
   if (!(await AuthModel.isPasswordMatched(payload?.password, auth?.password)))
@@ -101,10 +102,51 @@ const loginAuthIntoDB = async (payload: TLogin) => {
   };
 };
 
+
+const refreshToken = async (token: string) => {
+
+  const decoded = verifyToken(token, config.jwt_refresh_secret as string);
+console.log(decoded);
+  const { email } = decoded;
+
+
+  const auth = await AuthModel.isUserExistsByEmail(email);
+
+  if (!auth) {
+    throw new AppError(404, 'This user is not found !');
+  }
+ 
+
+  // checking if the user is blocked
+  const userStatus = auth?.isActive;
+
+  if (userStatus == false) {
+    throw new AppError(403, 'This user is DeActive ! !');
+  }
+
+ 
+
+  const jwtPayload = {
+    email: auth.email,
+    role: auth.role,
+  };
+
+  const accessToken = createToken(
+    jwtPayload,
+    config.jwt_access_secret as string,
+    config.jwt_access_expires_in as string,
+  );
+
+  return {
+    accessToken,
+  };
+};
+
 export const AuthServices = {
     createAuthIntoDB,
     loginAuthIntoDB,
     getAllAuthIntoDB,
     getSingleAuthIntoDB,
-    manageAuthIntoDB
+    manageAuthIntoDB,
+    refreshToken
 }
