@@ -5,7 +5,7 @@ import { AuthServices } from "./Auth.services";
 
 
 const createAuth = catchAsync(async (req, res) => {
-    const result = await AuthServices.createAuthIntoDB(req.file, req.body);
+    const result = await AuthServices.createAuthIntoDB(req.body);
   
     sendResponse(res, {
       statusCode: 200,

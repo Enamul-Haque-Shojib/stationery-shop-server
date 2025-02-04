@@ -2,23 +2,15 @@
 import QueryBuilder from "../../builder/QueryBuilder";
 import config from "../../config";
 import AppError from "../../errors/AppError";
-import { sendImageToCloudinary } from "../../utils/sendImageToCloudinary";
 import { authSearchableField } from "./Auth.constant";
 import { TAuth, TLogin } from "./Auth.interface";
 import { AuthModel } from "./Auth.model";
 import { createToken } from "./Auth.utils";
 
 
-const createAuthIntoDB = async (file:any, payload: TAuth) => {
+const createAuthIntoDB = async (payload: TAuth) => {
 
-  if (file) {
-    const imageName = `${payload.email}${payload?.name}`;
-    const path = file?.path;
-
-    //send image to cloudinary
-    const { secure_url } = await sendImageToCloudinary(imageName, path);
-    payload.imageUrl = secure_url as string;
-  }
+ 
  
     const createAuth = await AuthModel.create(payload);
     if (!createAuth) {

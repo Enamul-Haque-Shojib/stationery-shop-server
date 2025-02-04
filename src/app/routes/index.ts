@@ -1,8 +1,8 @@
 import express from 'express';
 
 import { ProductRoutes } from '../Modules/Products/Product.routes';
-import { CategoryRoutes } from '../Modules/Category/Category.routes';
 import { AuthRoutes } from '../Modules/Auth/Auth.routes';
+import { MarqueeImagRoutes } from '../Modules/MarqueeImage/MarqueeImage.routes';
 
 const router = express.Router();
 
@@ -11,13 +11,14 @@ const moduleRoutes = [
     path: '/auths',
     route: AuthRoutes,
   },
-  {
-    path: '/categories',
-    route: CategoryRoutes,
-  },
+  
   {
     path: '/products',
     route: ProductRoutes,
+  },
+  {
+    path: '/marquee',
+    route: MarqueeImagRoutes,
   },
   
 ];

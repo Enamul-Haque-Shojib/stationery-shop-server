@@ -1,21 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import QueryBuilder from '../../builder/QueryBuilder';
 import AppError from '../../errors/AppError';
-import { sendImageToCloudinary } from '../../utils/sendImageToCloudinary';
 import { orderSearchableField, productSearchableField } from './Product.constatnt';
 import { TOrderProduct, TProduct } from './Product.interface';
 import { OrderProductModel, ProductModel } from './Product.model';
 
-const createProductIntoDB = async (file: any, payload: TProduct) => {
+const createProductIntoDB = async (payload: TProduct) => {
 
-   if (file) {
-      const imageName = `${payload.title}${payload?.category}`;
-      const path = file?.path;
-  
-      //send image to cloudinary
-      const { secure_url } = await sendImageToCloudinary(imageName, path);
-      payload.productImgUrl = secure_url as string;
-    }
  
   const createProduct = await ProductModel.create(payload);
   if (!createProduct) {
