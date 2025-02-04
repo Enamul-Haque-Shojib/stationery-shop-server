@@ -25,14 +25,13 @@ const getAllAuthIntoDB = async (query: Record<string,unknown>) => {
     const authQuery = new QueryBuilder(AuthModel.find(), query)
     .search(authSearchableField)
     .sortAndOrder()
-    .paginate()
     .filter();
   const result = authQuery.modelQuery;
 
   return result;
 };
 const getSingleAuthIntoDB = async (email: string) => {
-  console.log(email)
+  
   
   const authData = await AuthModel.findOne({email})
   if(!authData) {
@@ -42,7 +41,7 @@ const getSingleAuthIntoDB = async (email: string) => {
 };
 
 const manageAuthIntoDB = async (email: string, manage: {isActive : string}) => {
-  console.log(email, manage.isActive)
+  
   const {isActive} = manage;
   if(isActive === "Active"){
     const updatedAuth = await AuthModel.findOneAndUpdate(

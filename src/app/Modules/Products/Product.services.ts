@@ -32,7 +32,6 @@ const getAllProductsFromDB = async (query: Record<string, unknown>) => {
   const productQuery = new QueryBuilder(ProductModel.find(), query)
     .search(productSearchableField)
     .sortAndOrder()
-    .paginate()
     .filter();
   const result = productQuery.modelQuery;
 
