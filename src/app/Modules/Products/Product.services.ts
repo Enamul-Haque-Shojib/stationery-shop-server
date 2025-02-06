@@ -70,7 +70,7 @@ const orderStatusChangeIntoDB = async (
 
 
 const createOrderProductFromDB = async (payload: TOrderProduct) => {
-  // Find the product in the database
+  
   const productData = await ProductModel.findOne({
     title: payload.productTitle,
     category: payload.productCategory,
