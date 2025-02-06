@@ -104,19 +104,19 @@ const createOrderProductFromDB = async (payload: TOrderProduct) => {
     throw new AppError(400, 'Not enough stock available');
   }
 
-  // Calculate new quantity after order
+
   const quantityNum = productData.quantity - payload.quantity;
 
-  // Update the product: if quantity is 0, set `inStock: false`
+
   await ProductModel.updateOne(
     { _id: productData._id },
     {
       quantity: quantityNum,
-      inStock: quantityNum > 0, // If quantity is 0, inStock will be false
+      inStock: quantityNum > 0, 
     },
   );
 
-  // Create the order
+ 
   const orderProductInfo = await OrderProductModel.create(payload);
 
   if (!orderProductInfo) {
