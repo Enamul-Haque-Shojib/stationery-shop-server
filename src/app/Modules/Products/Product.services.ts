@@ -67,26 +67,7 @@ const orderStatusChangeIntoDB = async (
   return updatedParcel;
 };
 
-// const createOrderProductFromDB = async (payload: TOrderProduct) => {
 
-//   const productData = await ProductModel.findOne({title: payload.productTitle, category: payload.productCategory}, );
-//   if(!productData) {
-//     throw new AppError(400, 'Failed to find product')
-//   }
-//   const quantityNum = productData.quantity - payload.quantity;
-//   if(quantityNum == 0){
-//     await ProductModel.
-//     // I want to update quantity and also if quantityNum is 0 than 'inStock' will be false
-//   }else{
-//     // only update quantity
-//   }
-
-//   const orderProductInfo = await OrderProductModel.create(payload);
-//   if(!orderProductInfo) {
-//     throw new AppError(400, 'Failed to create order')
-//   }
-//   return orderProductInfo;
-// };
 
 const createOrderProductFromDB = async (payload: TOrderProduct) => {
   // Find the product in the database
@@ -99,7 +80,7 @@ const createOrderProductFromDB = async (payload: TOrderProduct) => {
     throw new AppError(400, 'Failed to find product');
   }
 
-  // Ensure the requested quantity is available
+
   if (payload.quantity > productData.quantity) {
     throw new AppError(400, 'Not enough stock available');
   }
