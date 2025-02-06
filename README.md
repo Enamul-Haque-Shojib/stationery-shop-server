@@ -1,5 +1,3 @@
-
-
 ## Project : Stationery Shop
 
 ## Website Live link:
@@ -8,14 +6,13 @@
 
 ## Features:
 
-- 
+-
 
 ### Frontend:
 
 - React js
 - tailwind
 - react router dom,
-
 
 ### Backend:
 

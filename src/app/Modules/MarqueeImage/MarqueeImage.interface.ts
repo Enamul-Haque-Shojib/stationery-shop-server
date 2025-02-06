@@ -1,4 +1,3 @@
-
 export type TMarqueeImg = {
-    image: string;
-}
+  image: string;
+};

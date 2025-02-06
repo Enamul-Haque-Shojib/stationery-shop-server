@@ -1,22 +1,16 @@
-import { model, Schema } from "mongoose";
-import { TMarqueeImg } from "./MarqueeImage.interface";
-
+import { model, Schema } from 'mongoose';
+import { TMarqueeImg } from './MarqueeImage.interface';
 
 const authSchema = new Schema<TMarqueeImg>(
-    {
-     
-      image: {
-        type: String,
-        required: true,
-      },
-   
+  {
+    image: {
+      type: String,
+      required: true,
     },
-    {
-      timestamps: true,
-    },
-  );
+  },
+  {
+    timestamps: true,
+  },
+);
 
-  export const MarqueeImageModel = model<TMarqueeImg>(
-    'MarqueeImg',
-    authSchema,
-  );
+export const MarqueeImageModel = model<TMarqueeImg>('MarqueeImg', authSchema);

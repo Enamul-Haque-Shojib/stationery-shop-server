@@ -3,7 +3,6 @@ import { TOrderProduct, TProduct } from './Product.interface';
 
 const orderProductSchema = new Schema<TOrderProduct>(
   {
-   
     productTitle: {
       type: String,
       required: true,
@@ -19,7 +18,7 @@ const orderProductSchema = new Schema<TOrderProduct>(
     quantity: {
       type: Number,
       required: true,
-      default:0
+      default: 0,
     },
     price: {
       type: Number,
@@ -39,7 +38,6 @@ const orderProductSchema = new Schema<TOrderProduct>(
 
 const productSchema = new Schema<TProduct>(
   {
-   
     title: {
       type: String,
       required: true,
@@ -70,23 +68,18 @@ const productSchema = new Schema<TProduct>(
       type: String,
       required: true,
     },
-    
+
     inStock: {
       type: Boolean,
       default: true,
     },
-    
   },
   {
     timestamps: true,
   },
 );
 
-
-export const ProductModel = model<TProduct>(
-  'Product',
-  productSchema,
-);
+export const ProductModel = model<TProduct>('Product', productSchema);
 export const OrderProductModel = model<TOrderProduct>(
   'Order Product',
   orderProductSchema,

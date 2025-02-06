@@ -4,7 +4,6 @@ import { JwtPayload } from 'jsonwebtoken';
 import config from '../config';
 import AppError from '../errors/AppError';
 
-
 import catchAsync from '../utils/catchAsync';
 
 import { TAuthRole } from '../Modules/Auth/Auth.interface';
@@ -20,9 +19,7 @@ const auth = (...requiredRoles: TAuthRole[]) => {
       throw new AppError(401, 'You are not authorized!');
     }
 
- 
     const decoded = verifyToken(token, config.jwt_access_secret as string);
-    
 
     const { role, email } = decoded;
 
@@ -34,10 +31,7 @@ const auth = (...requiredRoles: TAuthRole[]) => {
     }
 
     if (requiredRoles && !requiredRoles.includes(role)) {
-      throw new AppError(
-        401,
-        'You are not authorized  hi!',
-      );
+      throw new AppError(401, 'You are not authorized  hi!');
     }
 
     req.user = decoded as JwtPayload & { role: string };
@@ -46,5 +40,3 @@ const auth = (...requiredRoles: TAuthRole[]) => {
 };
 
 export default auth;
-
-

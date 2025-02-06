@@ -12,12 +12,9 @@ export const createToken = (
 };
 
 export const verifyToken = (token: string, secret: string) => {
-  try{
+  try {
     return jwt.verify(token, secret) as JwtPayload;
-  }catch(err){
+  } catch (err) {
     throw new AppError(401, 'Unauthorized!');
   }
-
 };
-
-

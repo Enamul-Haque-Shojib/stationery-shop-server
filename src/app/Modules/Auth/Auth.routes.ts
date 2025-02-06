@@ -5,26 +5,20 @@ import { AuthControllers } from './Auth.controllers';
 import auth from '../../middlewares/auth';
 import { AUTH_ROLE } from './Auth.constant';
 
-
-
 const router = express.Router();
 
 router.post(
   '/create-auth',
   validateRequest(authSchemaValidations.createAuthSchemaValidation),
-  AuthControllers.createAuth
+  AuthControllers.createAuth,
 );
-
 
 router.post(
   '/login',
   validateRequest(authSchemaValidations.loginAuthSchemaValidation),
   AuthControllers.loginAuth,
 );
-router.get(
-  '/',
-  AuthControllers.getAllAuth,
-);
+router.get('/', AuthControllers.getAllAuth);
 router.get(
   '/profile/:email',
   auth(AUTH_ROLE.user, AUTH_ROLE.admin),
@@ -40,6 +34,5 @@ router.post(
   validateRequest(authSchemaValidations.refreshTokenValidationSchema),
   AuthControllers.refreshToken,
 );
-
 
 export const AuthRoutes = router;

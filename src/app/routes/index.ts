@@ -11,7 +11,7 @@ const moduleRoutes = [
     path: '/auths',
     route: AuthRoutes,
   },
-  
+
   {
     path: '/products',
     route: ProductRoutes,
@@ -20,7 +20,6 @@ const moduleRoutes = [
     path: '/marquee',
     route: MarqueeImagRoutes,
   },
-  
 ];
 
 moduleRoutes.forEach((route) => router.use(route.path, route.route));

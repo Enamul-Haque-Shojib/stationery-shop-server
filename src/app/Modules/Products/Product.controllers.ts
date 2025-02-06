@@ -2,7 +2,6 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { ProductServices } from './Product.services';
 
-
 const createProduct = catchAsync(async (req, res) => {
   const result = await ProductServices.createProductIntoDB(req.body);
 
@@ -75,7 +74,10 @@ const OrderProductList = catchAsync(async (req, res) => {
 });
 
 const orderStatusChange = catchAsync(async (req, res) => {
-  const result = await ProductServices.orderStatusChangeIntoDB(req.params.id, req.body);
+  const result = await ProductServices.orderStatusChangeIntoDB(
+    req.params.id,
+    req.body,
+  );
 
   sendResponse(res, {
     statusCode: 200,
@@ -86,12 +88,12 @@ const orderStatusChange = catchAsync(async (req, res) => {
 });
 
 export const ProductControllers = {
- createProduct,
- updateProduct,
- getAllProducts,
- getSingleProduct,
- deleteSingleProduct,
- createOrderProduct,
- OrderProductList,
- orderStatusChange,
+  createProduct,
+  updateProduct,
+  getAllProducts,
+  getSingleProduct,
+  deleteSingleProduct,
+  createOrderProduct,
+  OrderProductList,
+  orderStatusChange,
 };

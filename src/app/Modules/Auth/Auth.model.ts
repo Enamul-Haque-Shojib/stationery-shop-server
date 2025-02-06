@@ -1,18 +1,11 @@
-
-
 import { model, Schema } from 'mongoose';
 import { AuthStaticModel, TAuth } from './Auth.interface';
 import { authRole } from './Auth.constant';
 import bcrypt from 'bcrypt';
 import config from '../../config';
 
-
-
-
-
 const authSchema = new Schema<TAuth, AuthStaticModel>(
   {
-   
     name: {
       type: String,
       required: true,
@@ -29,23 +22,22 @@ const authSchema = new Schema<TAuth, AuthStaticModel>(
     password: {
       type: String,
       required: true,
-      select: 0
+      select: 0,
     },
     role: {
       type: String,
       enum: authRole,
-      default: 'user'
+      default: 'user',
     },
     isActive: {
       type: Boolean,
-      default: true
+      default: true,
     },
   },
   {
     timestamps: true,
   },
 );
-
 
 authSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
@@ -74,7 +66,4 @@ authSchema.statics.isPasswordMatched = async function (
   return await bcrypt.compare(plainTextPassword, hashedPassword);
 };
 
-export const AuthModel = model<TAuth, AuthStaticModel>(
-  'Auth',
-  authSchema,
-);
+export const AuthModel = model<TAuth, AuthStaticModel>('Auth', authSchema);
