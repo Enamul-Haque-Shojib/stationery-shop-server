@@ -19,7 +19,7 @@ export type TAuth = {
 export interface AuthStaticModel extends Model<TAuth> {
 
   isUserExistsByEmail(email: string): Promise<TAuth>;
-  //instance methods for checking if passwords are matched
+
   isPasswordMatched(
     plainTextPassword: string,
     hashedPassword: string,
