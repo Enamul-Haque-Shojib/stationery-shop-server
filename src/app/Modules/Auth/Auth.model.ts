@@ -42,7 +42,7 @@ const authSchema = new Schema<TAuth, AuthStaticModel>(
 authSchema.pre('save', async function (next) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const auth = this; // doc
-  // hashing password and save into DB
+
   auth.password = await bcrypt.hash(
     auth.password,
     Number(config.bcrypt_salt_rounds),
